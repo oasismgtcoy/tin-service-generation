@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="base::head">
+    	
+    </head>
+<body id="user-bg">
+	<div class="page-cover">
+		   <div id="header">
+                <div id="tpn" >
+                    <img src="../static/img/new_jtb_logo.png" th:src="@{/img/new_jtb_logo.png}"/>
+                    <p style="color:whitesmoke">Tax Services</p>
+                </div>
+                <div id="text" >
+                    <form  class="form-inline">
+                        <div class="input-group">
+                            <input type="text" placeholder="Search for..." size="50" id="rcNo"/>
+                            <div class="input-group-btn">
+                                <button type="submit" id="search" class="btn btn-lg">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="login" >
+                    <ul>
+                        <li> <a href="../templates/signup.html" th:href="@{/signup.html}"></a></li>
+                        <li><a href="../templates/index.html" th:href="@{/}">Logout</a></li>
+                    </ul>
+                </div> 
+            </div>
+            <div id="user-date-filter">
+               <p>
+	               	<label>Filter:  
+	               		<input type="date" id="beginDate" class="date" size="10" placeholder="yyyy/mm/dd" required="required"/> to 
+	               		<input type="date" placeholder="yyyy/mm/dd" id="endDate"  class="date" size="10" required="required"/>
+	               	</label>
+               	</p>
+            	<span class="validity"></span>
+            </div>
+            <div class="main-container">
+            	<div id="user-container1">
+            		<a href="#" th:href="@{#}">
+	                    <div id="user-icon1" class="user-icon">
+	                        <i class="material-icons">account_box</i>
+	                        <p>Account Profile</p>
+	                    </div>
+	                </a>
+	                <a href="#" th:href="@{#}">
+	                    <div id="user-icon2"  class="user-icon">
+	                        <i class="material-icons">input</i>
+	                        <p>Electronic <br/>Filling</p>
+	                    </div>
+	                </a>
+	                <a href="#" th:href="@{#}">
+	                    <div id="user-icon3"  class="user-icon">
+	                        <i class="fa fa-bell"></i>
+	                        <p>Notification</p>
+	                    </div>
+	               	 </a>
+	               	 <a href="#" th:href="@{#}">
+	                    <div id="user-icon4"  class="user-icon">
+	                        <i class="material-icons">event</i>
+	                        <p>Transaction</p>
+	                    </div>
+	                </a>
+	                <a href="#" th:href="@{#}">
+	                    <div id="user-icon5"  class="user-icon">
+	                        <span class="glyphicon glyphicon-user"></span>
+	                        <p>ssss</p>
+	                    </div>
+	                </a>
+	                <a href="#" th:href="@{#}">
+	                    <div id="user-icon6"  class="user-icon">
+	                        <span class="glyphicon glyphicon-list-alt"></span>
+	                        <p>wwws</p>
+	                    </div>
+	               	 </a>
+	               	 <a href="#" th:href="@{#}">
+	                    <div id="user-icon7"  class="user-icon">
+	                        <span class="glyphicon glyphicon-edit"></span>
+	                        <p>Change Email</p>
+	                    </div>
+	                </a>
+	                <a href="#" th:href="@{#}">
+	                    <div id="user-icon8" class="user-icon">
+	                        <i class="material-icons">lock_outline</i>
+	                        <p>Change Password</p>
+	                    </div>
+	                </a>
+	                <a href="#" th:href="@{#}">
+	                    <div id="user-icon9"  class="user-icon">
+	                        <span class="glyphicon glyphicon-log-out"></span>
+	                        <p>Logout</p>
+	                    </div>
+	               	 </a>
+            		
+            	</div>
+            	<div id="user-container2">
+            		<div id="user-info-table">
+            			<div class="table-responsive">
+	            			<table id="info-table" class="table table-hover">
+	            				<thead>
+	            					<tr>
+		            					<th>Name </th>
+		            					<th>State </th>
+		            					<th> Thing </th>
+		            					<th> Animal </th>
+		            					<th> Place </th>
+		            					<th> Country </th>
+		            					<th> Data </th>
+		            					<th> Online </th>
+		            					<th> Palnc </th>
+		            					<th> Croser </th>
+		            					<th> Anser </th>
+		            					<th> Sapele </th>
+	            					</tr>
+	            				</thead>
+	            				<tbody>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            				<tr>
+		            					<td>hdh</td>
+		            					<td>kkdkkd</td>
+		            					<td>kdkkkdoood</td>
+		            					<td>lkdkkd</td>
+		            					<td>jjdjjd</td>
+		            					<td>oddii</td>
+		            					<td>jwiiis</td>
+		            					<td>diidii</td>
+		            					<td>duud</td>
+		            					<td>poiuusi</td>
+		            					<td>dkkd</td>
+		            					<td>dod</td>
+		            				</tr>
+		            			</tbody>
+	            			</table>
+	            		</div>
+            		</div>
+            		
+            	</div>
+            	<div id="user-dashboard-button">
+            		<p>
+	           			<button class="btn "><span class="glyphicon glyphicon-save"></span> Save</button>
+	           			<button  class="btn"> <span class="glyphicon glyphicon-print"></span> Print </button> 
+	           			<button  class="btn"><span class="glyphicon glyphicon-export"></span> Export</button>
+            		</p>
+            	</div>
+            </div>
+	</div>
+	<div th:replace="base::footer"></div>
+	<script>
+		$(document).ready(function(){
+			$("#endDate").datepicker({
+				dateFormat:'dd/mm/yy',
+				maxDate:'+0m +0w'
+			});
+			$("#beginDate").datepicker({
+				dateFormat:'dd/mm/yy'
+			});
+		});
+	</script>
+</body>
+</html>

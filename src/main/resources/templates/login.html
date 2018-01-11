@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="base::head"></head>
+    <body>
+        <div class="page-cover">
+        	<div th:replace="base::header"></div>
+        	<div id="login-panel" >
+        	<div class="panel " id="main-login-panel">
+        		<div class="panel-heading account-header">
+        			<h2>Login</h2>
+        		</div>
+        		<form method="post"  th:attr="action=@{/user_dashboard}" autocomplete>
+	        		<div class="panel-body" id="main-login-panel-body">
+	        			
+	        				<div>
+	        					<label for="email" class="control-label">Email</label>
+	        					<input type="email" name="email" class="form-control" required="required"/>
+	        				</div>
+	        				<div>
+	        					<label for="password" class="control-label">Password</label>
+	        					<input type="password" name="password" class="form-control" required="required"/>
+	        				</div>
+	        				<div>
+	        					<label for="text" class="control-label">TIN (optional)</label>
+	        					<input type="text" name="tin" class="form-control" />
+	        				</div>
+	        				<div>
+	        					<label for="ëmail" class="control-label"><input type="checkbox"/>  Remember me</label>
+	        					<a href="#" th:href="@{#}">Forgot Password</a>
+	        				</div>
+	        			
+	        		</div>
+	        		<div id="login-footer" class="panel-footer">
+	        			<a href="../templates/index.html" th:href="@{/}" class="btn btn-default">Back</a>
+	        			<input type="submit" value="Login" id="input_link" class="btn btn-default"/>
+	        		</div>
+        	</form>
+        </div>
+      </div>
+        </div>
+        <footer th:replace="base::footer"></footer>
+    </body>
+</html>

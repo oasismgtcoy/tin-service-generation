@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fTemplate :: head"></head>
+	<body>
+		
+		<div style="top:0px" th:replace="fTemplate :: main_menu"></div>		
+		
+		<div class="center-container">
+			<strong><i th:text="${pageTitle}"></i></strong>
+			<div class="panel panel-default">
+			  <div class="panel-heading"> <i th:text="${'View/Edit '+ tin_request.name_of_organization}"></i></div>
+			  <div class="panel-body">
+			
+			  <div class="form-group row ">
+			  	<div  th:object="${tin_request.corporateTinGenerationRequest}" class="col-md-4">
+					
+						  <div class="form-group">
+						    <label >RC Number</label>
+						    <input type="text"  readonly="readonly" th:value="*{rcno}"  class="form-control"/>						   
+						  </div>
+						   <div class="form-group">
+						    <label >Name of organization</label>
+						    <input type="text"  readonly="readonly" th:value="*{name_of_organization}"  class="form-control"/>	
+						    <input type="hidden" name="id" th:value="*{id}"  />
+						  </div>						  
+						  <div class="form-group">
+						    <label>Reg. No of organization</label>
+						    <input type="text"  readonly="readonly"  th:value="*{regno_of_organization}" class="form-control"/>
+						  </div>						  						  
+						   <div class="form-group">
+						    <label >Trade  name of organization</label>
+						    <input type="text" readonly="readonly"  th:value="*{trade_name_of_organization}" class="form-control" />
+						  </div>
+						   <div class="form-group">
+						    <label >Type of organization</label>
+						    <input type="text" readonly="readonly"  th:value="*{type_of_organization}" class="form-control"/>
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputPassword1">Line of business</label>
+						    <input type="text" readonly="readonly"  th:value="*{line_of_business}" class="form-control"/>
+						  </div>
+						  <div class="form-group">
+						    <label >Date of registration / incorporation / commencement</label>
+						    <input type="text" readonly="readonly"  th:value="*{date_of_registration} +' / '+ *{date_of_incorporation} +' / '+ *{date_of_commencement}" class="form-control"/>						   
+						  </div>
+						  
+						   <div class="form-group">
+						    <label >Financial year begin/end</label>
+						    <input type="text" readonly="readonly"  th:value="*{financial_year_begin} +' / '+ *{financial_year_end}" class="form-control"/>
+						  </div> 
+						 					
+						</div>
+						 <div th:object="${tin_request.corporateTinGenerationRequest}" class="col-md-4">
+							  <div class="form-group">
+							    <label >Bank name</label>
+							    <input type="text" readonly="readonly"  th:value="*{bank_name}" class="form-control"/>
+							  </div> 
+							  <div class="form-group">
+							    <label >Sort Code</label>
+							    <input type="text" readonly="readonly"  th:value="*{bank_branch}" class="form-control" />
+							  </div> 
+							  <div class="form-group">
+							    <label >Bank account no</label>
+							    <input type="text" readonly="readonly"  th:value="*{bank_account_no}" class="form-control" />
+							  </div> 
+							  <div class="form-group">
+							    <label >Bank name II</label>
+							    <input type="text" readonly="readonly"  th:value="*{bank_name2}" class="form-control" />
+							  </div> 
+							  <div class="form-group">
+							    <label >Bank branch II</label>
+							    <input type="text" readonly="readonly"  th:value="*{bank_branch2}" class="form-control" />
+							  </div> 
+							  <div class="form-group">
+							    <label >Bank account no II</label>
+							    <input type="text" readonly="readonly"  th:value="*{bank_account_no2}" class="form-control" />
+							  </div> 
+							  <div class="form-group">
+							    <label >Branch or Headquarters</label>
+							    <input type="text" readonly="readonly"  th:value="*{branch_headquarters}" class="form-control" />
+							  </div> 
+							  
+						</div>	
+						
+						<div th:object="${tin_request.corporateTinGenerationRequest}" class="col-md-4">					 
+						  
+						  <div class="form-group">
+						    <label >Phone no. primary</label>
+						    <input type="text" readonly="readonly"  th:value="*{phone_no_primary}" class="form-control"/>
+						  </div> 
+						  <div class="form-group">
+						    <label >E_mail</label>
+						    <input type="text" readonly="readonly"  th:value="*{e_mail_primary} +', '+ *{e_mail_alternative}"  class="form-control"/>
+						  </div>
+						  
+						  <div class="form-group">
+						    <label >Address</label>
+						    <textarea readonly="readonly" th:text="*{house_no} +', '+ *{street_name}+', '+ *{city}" class="form-control"></textarea>
+						  </div>
+						  
+						  <div class="form-group">
+						    <label >Lga/State</label>
+						    <input type="text" readonly="readonly"  th:value="*{lga} +', '+ *{state}" class="form-control"/>
+						  </div>
+						  
+						  <div class="form-group">
+						    <label >Representative name</label> 
+						    <input type="text" readonly="readonly"  th:value="*{representative_name}" class="form-control"/>
+						  </div> 
+						  <div class="form-group">
+						    <label >Representative address</label> 
+						    <input type="text" readonly="readonly"  th:value="*{representative_address}" class="form-control"/>
+						  </div> 
+						  <div class="form-group">
+						    <label >Representative type</label>
+						    <input type="text" readonly="readonly"  th:value="*{representative_type}" class="form-control"/>
+						  </div> 
+						  </div>
+						 				
+					</div>
+					<hr/>
+					<div class="row">
+						<div th:object="${tin_request}" class="col-md-3">
+							 <div class="form-group">
+						    <label >MDA Transaction ID | Tin | Issuance Date</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.mda_transaction_id} +' | '+ ${tin_request.tin} +' | '+ ${tin_request.issuanceDate}"/>						   
+						  </div>
+						  						  
+						  <div class="form-group">
+						    <label >Status</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.messageStatus}"/>						   
+						  </div>	
+						  
+						  <div th:object="${tin_request.corporateTinGenerationRequest}">
+							<div class="form-group">
+							 <label >Source</label>
+							    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.requestSource}"/>						   
+							  </div>
+							 <div class="form-group">
+							    <label >Previous taxpayer number used / no issuing tax authority state</label>
+							    <input type="text" readonly="readonly"  th:value="*{previous_taxpayer_number_used +' / '+ previous_taxpayer_no_issuing_tax_authority_state}" class="form-control" />
+							  </div>
+							 
+							  <div class="form-group">
+							    <label >Tax_office</label>
+							    <input type="text" readonly="readonly"  th:value="*{tax_office}" class="form-control" />
+							  </div> 
+							 
+							</div>
+						    
+						 <a href="/dashboard" th:href="@{/dashboard}" class="btn btn-warning col-md-2">Back</a>
+						</div>
+						
+						
+							
+							<div th:object="${tin_request}" class="col-md-3">
+							
+							 <div class="form-group">
+						    <label >Date of Arrival</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.formatDateTime(tin_request.dateOfArrivalFromSourceMda)}"/>						   
+						  </div>
+						   <div class="form-group">
+						    <label >Last Updated</label>
+						    <input type="text"  readonly="readonly"  th:value="${tin_request.formatDateTime(tin_request.lastUpdatedDate)}"  class="form-control"/>   
+						  </div> 						  
+						  <div class="form-group">
+						    <label >RC Departure to JTB</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.formatDateTime(tin_request.dateOfDepartureToJtb)}"/>						   
+						  </div>	
+						  </div>
+						  <div th:object="${tin_request}" class="col-md-3">
+						  <div class="form-group">
+						    <label >Entered Task Queue</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.formatDateTime(tin_request.dateOfWriteToJtbFolder)}"/>						   
+						  </div>
+						  <div class="form-group">
+						    <label >Left Task Queue</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.formatDateTime(tin_request.dateOfReadFromJtbFolder)}"/>						   
+						  </div>
+						  <div class="form-group">
+						    <label >TIN Arrival From Jtb</label>
+						    <input type="text" readonly="readonly" class="form-control" th:value="${tin_request.formatDateTime(tin_request.dateOfArrivalFromJtb)}"/>						   
+						  </div>	
+						  <div class="form-group">
+						    <label >Notification to owner</label>
+						    <input type="text"  readonly="readonly" th:value="${tin_request.formatDateTime(tin_request.notificationDepartureDate)}"  class="form-control"/>
+						  </div>   
+						</div>
+						
+					
+					</div>
+			 </div>
+			
+			</div>
+		</div>
+	 		
+		<div th:replace="fTemplate :: footer"></div> 
+</body>
+</html>

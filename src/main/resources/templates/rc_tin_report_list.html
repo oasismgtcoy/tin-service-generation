@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="uTemplate :: head"></head>
+<body>
+
+	<div style="top: 0px" th:replace="uTemplate :: main_menu"></div>
+	<div class="center-container">			
+			<h4 th:if="${tableTitle != null}" style="text-align:center" th:text="${tableTitle}"></h4>			
+			<form class="form-horizontal hidden-print" method="get">
+				<div class="panel panel-default">
+					<div align="right" class="panel panel-body" >					
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+							<div class="input-group">
+								<span class="input-group-addon">RC Number</span> <input
+									name="rcNumber" placeholder="Optional search"
+									class="form-control" type="text" />
+							</div>
+						</div>						
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="input-group">
+								<span class="input-group-addon">From</span> <input
+									name="startDate" placeholder="dd/MM/yyyy"
+									id="strtDate"  class="form-control" type="text"/>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="input-group">
+								<span class="input-group-addon">To</span> <input
+									name="endDate" placeholder="dd/MM/yyyy"	id="endDate"
+									class="form-control col-xs-12 col-sm-12 col-md-2 col-lg-2"	type="text" />
+							</div>
+						</div>
+						
+						<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1" >
+							<input class="btn btn-default btn-sm" style="background-color:gray" value="Search" type="submit" />
+						</div>
+					</div>
+				</div>
+			</form>
+		
+		<i th:if="${incoming_rc_numbers_records != null}" th:text="${incoming_rc_numbers_records.size() == 0?' No record found for ':incoming_rc_numbers_records.size()+' record(s) found for '}"	class="text text-default"></i>
+		
+		<i th:if="${outgoing_rc_numbers != null}" th:text="${outgoing_rc_numbers.size() == 0?' No record found for ':outgoing_rc_numbers.size()+' record(s) found for '}"	class="text text-default"></i>
+		<i th:if="${incoming_rc_tin != null}" th:text="${incoming_rc_tin.size() == 0?' No record found for ':incoming_rc_tin.size()+' record(s) found for '}"	class="text text-default"></i>
+		<i th:if="${incoming_rc_numbers != null}" th:text="${incoming_rc_numbers.size()== 0?' No record found for ':incoming_rc_numbers.size()+' record(s) found for '}"	class="text text-default"></i>		
+		<i th:text="${pageTitle}"></i>
+		
+		
+		<div th:if="${incoming_rc_numbers !=  null}"
+			class="bs-example widget-shadow" data-example-id="contextual-table">
+			<p th:text="${errmessage}" class="text text-danger"></p>
+
+			<table id="example" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>RC Number</th>
+						<th>Org. Name</th>
+						<th>Org. Type</th>
+						<th>Line of Business</th>
+						<th>Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rc_tin, indx: ${incoming_rc_numbers}">
+						<td th:title="${rc_tin.tin}" th:text="${rc_tin.rcno}"></td>
+						<td th:text="${rc_tin.name_of_organization}"></td>
+						<td	th:text="${rc_tin.corporateTinGenerationRequest.type_of_organization}"></td>
+						<td	th:text="${rc_tin.corporateTinGenerationRequest.line_of_business}"></td>
+						<td	th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}"></td>
+						<td><a class="viewMore"
+						 th:attr="data-diff_st_n_cus=${rc_tin.getDifference(rc_tin.dateOfArrivalFromJtb,rc_tin.notificationDepartureDate)},data-diff_wtq_n_rtq=${rc_tin.getDifference(rc_tin.dateOfWriteToJtbFolder,rc_tin.dateOfReadFromJtbFolder)},data-diff_mda_n_ts=${rc_tin.getDifference(rc_tin.dateOfArrivalFromSourceMda,rc_tin.dateOfWriteToJtbFolder)},data-left_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfReadFromJtbFolder)},data-entered_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfWriteToJtbFolder)},data-customer_notification=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_departure=${rc_tin.formatDateTime(rc_tin.dateOfDepartureToJtb)}, data-mda_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}, data-tin_no=${rc_tin.tin}, data-org_name=${rc_tin.name_of_organization},  data-org_type=${rc_tin.corporateTinGenerationRequest.type_of_organization} , data-rc_number=${rc_tin.rcno} , data-lineofbusiness=${rc_tin.corporateTinGenerationRequest.line_of_business}"  href="#">More</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div th:if="${outgoing_rc_numbers !=  null}"
+			class="bs-example widget-shadow" data-example-id="contextual-table">			
+			<p th:text="${errmessage}" class="text text-danger"></p>
+			<table id="example" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>RC Number</th>
+						<th>Org. Name</th>
+						<th>Org. Type</th>
+						<th>Inbound Date</th>
+						<th>Outbound Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rc_tin, indx: ${outgoing_rc_numbers}">
+						<td th:title="${rc_tin.tin}" th:text="${rc_tin.rcno} "></td>
+						<td th:text="${rc_tin.name_of_organization}"></td>
+						<td	th:text="${rc_tin.corporateTinGenerationRequest.type_of_organization}"></td>
+						<td	th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}"></td>
+						<td	th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}"></td>
+						<td><a class="viewMore"
+						 th:attr="data-diff_st_n_cus=${rc_tin.getDifference(rc_tin.dateOfArrivalFromJtb,rc_tin.notificationDepartureDate)},data-diff_wtq_n_rtq=${rc_tin.getDifference(rc_tin.dateOfWriteToJtbFolder,rc_tin.dateOfReadFromJtbFolder)},data-diff_mda_n_ts=${rc_tin.getDifference(rc_tin.dateOfArrivalFromSourceMda,rc_tin.dateOfWriteToJtbFolder)},data-left_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfReadFromJtbFolder)},data-entered_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfWriteToJtbFolder)},data-customer_notification=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_departure=${rc_tin.formatDateTime(rc_tin.dateOfDepartureToJtb)}, data-mda_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}, data-tin_no=${rc_tin.tin}, data-org_name=${rc_tin.name_of_organization},  data-org_type=${rc_tin.corporateTinGenerationRequest.type_of_organization} , data-rc_number=${rc_tin.rcno} , data-lineofbusiness=${rc_tin.corporateTinGenerationRequest.line_of_business}"  href="#">More</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div th:if="${incoming_rc_tin !=  null}"
+			class="bs-example widget-shadow" data-example-id="contextual-table">
+			
+			<p th:text="${errmessage}" class="text text-danger"></p>
+
+			<table id="example" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>RC Number</th>						
+						<th>Org. Name</th>
+						<th>RC Inbound Date</th>
+						<th>RC Outbound Date</th>
+						<th>TIN</th>
+						<th>TIN Inbound Date</th>
+						<th>TIN Notification Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rc_tin, indx: ${incoming_rc_tin}">
+						<td th:text="${rc_tin.rcno} "></td>						
+						<td ><small th:text="${rc_tin.name_of_organization}"></small></td>
+						<td
+							th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}"></td>
+						<td
+							th:text="${rc_tin.formatDateTime(rc_tin.dateOfDepartureToJtb)}"></td>
+						<td th:text="${rc_tin.tin} "></td>
+						<td
+							th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)}"></td>
+						<td
+							th:text="${rc_tin.formatDateTime(rc_tin.notificationDepartureDate)}"></td>
+						<td><a class="viewMore"
+						 th:attr="data-diff_st_n_cus=${rc_tin.getDifference(rc_tin.dateOfArrivalFromJtb,rc_tin.notificationDepartureDate)},data-diff_wtq_n_rtq=${rc_tin.getDifference(rc_tin.dateOfWriteToJtbFolder,rc_tin.dateOfReadFromJtbFolder)},data-diff_mda_n_ts=${rc_tin.getDifference(rc_tin.dateOfArrivalFromSourceMda,rc_tin.dateOfWriteToJtbFolder)},data-left_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfReadFromJtbFolder)},data-entered_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfWriteToJtbFolder)},data-customer_notification=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_departure=${rc_tin.formatDateTime(rc_tin.dateOfDepartureToJtb)}, data-mda_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}, data-tin_no=${rc_tin.tin}, data-org_name=${rc_tin.name_of_organization},  data-org_type=${rc_tin.corporateTinGenerationRequest.type_of_organization} , data-rc_number=${rc_tin.rcno} , data-lineofbusiness=${rc_tin.corporateTinGenerationRequest.line_of_business}"  href="#">More</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<div th:if="${incoming_rc_numbers_records !=  null}"
+			class="bs-example widget-shadow" data-example-id="contextual-table">
+			
+			<table id="example" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>RC Number</th>
+						<th>Org. Name</th>						
+						<th>RC Arrival Date</th>
+						<th>TIN</th>
+						<th>TIN Arrival Date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rc_tin, indx: ${incoming_rc_numbers_records}">
+						<td th:text="${rc_tin.rcno} "></td>
+						<td th:text="${rc_tin.name_of_organization}"></td>
+						<td
+							th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}"></td>
+						<td
+							th:text="${rc_tin.tin == null ? 'N/A' : rc_tin.tin }"></td>
+						<td
+							th:text="${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)}"></td>
+						<td><a class="viewMore"
+						 th:attr="data-diff_st_n_cus=${rc_tin.getDifference(rc_tin.dateOfArrivalFromJtb,rc_tin.notificationDepartureDate)},data-diff_wtq_n_rtq=${rc_tin.getDifference(rc_tin.dateOfWriteToJtbFolder,rc_tin.dateOfReadFromJtbFolder)},data-diff_mda_n_ts=${rc_tin.getDifference(rc_tin.dateOfArrivalFromSourceMda,rc_tin.dateOfWriteToJtbFolder)},data-left_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfReadFromJtbFolder)},data-entered_taskqueue=${rc_tin.formatDateTime(rc_tin.dateOfWriteToJtbFolder)},data-customer_notification=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromJtb)},data-jtb_departure=${rc_tin.formatDateTime(rc_tin.dateOfDepartureToJtb)}, data-mda_arrival=${rc_tin.formatDateTime(rc_tin.dateOfArrivalFromSourceMda)}, data-tin_no=${rc_tin.tin}, data-org_name=${rc_tin.name_of_organization},  data-org_type=${rc_tin.corporateTinGenerationRequest.type_of_organization} , data-rc_number=${rc_tin.rcno}  , data-lineofbusiness=${rc_tin.corporateTinGenerationRequest.line_of_business}"  href="#">More</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<a href="/administrator/dashboard"
+			th:href="@{/administrator/dashboard}"
+			class="link link-warning col-md-2 hidden-print">Back</a>
+	</div>
+	<div style="bottom: 0px" th:replace="uTemplate :: footer"></div>
+	<script>
+		$(document).ready(function() {
+			$('.table').DataTable();
+		});
+		/*  $( function() {
+    	    $( "#endDate" ).datepicker({dateFormat: 'dd/mm/yy', maxDate:'+0m +0w' });
+    	    $( "#strtDate" ).datepicker({dateFormat: 'dd/mm/yy'});
+    	  } );
+		  */
+		tin = $('.viewMore').data('tin_no');
+		tin  = tin == undefined ? 'N/A' : tin;
+		$('.viewMore').click(function(){
+			$.alert(
+					{
+						columnClass: 'col-md-9 col-md-offset-2',					
+					    title: '<h5>RC/TIN Generation Review</h5>',					    
+					    content: '<div class="col-md-12">'+
+										'<div class="panel panel-default">'+
+										'<div class="panel-heading"><small>'+$('.viewMore').data('org_name')+'</small></div>'+
+										'<div class="panel-body">'+													
+							    	'<div>'+	   	         
+							    	 ' <table class="table table-hover">'+					    	   
+							    	   ' <tbody>'+
+							    	   '   <tr>'+
+							    	   '     <td>RC Number</td>'+
+							    	    '    <td>'+$('.viewMore').data('rc_number')+'</td>'+					    	   
+							    	    '  </tr>'+		    	    	
+								    	    '   <tr>'+
+									    	   '     <td>TIN</td>'+
+									    	    '    <td>'+tin+'</td>'+					    	   
+									    	    '  </tr>'+	
+						    	    '   <tr>'+
+							    	   '     <td>Org. Type</td>'+
+							    	    '    <td>'+$('.viewMore').data('org_type')+'</td>'+					    	   
+							    	    '  </tr>'+	
+							    	    '   <tr>'+
+								    	   '     <td>Line of Business</td>'+
+								    	    '    <td>'+$('.viewMore').data('lineofbusiness')+'</td>'+					    	   
+								    	    '  </tr>'+	
+							    	   ' </tbody>'+
+							    	'  </table>'+
+							    	'Date Comparisons'+
+							    	 ' <table class="table table-hover">'+
+							    	  ' <tbody>'+
+							    	   '   <tr>'+
+							    	    '    <th>Inbound from MDA</th>'+
+							    	    '    <th>Outbound to JTB</th>'+
+							    	     '   <th>Difference</th>'+
+							    	    '  </tr>'+		    	 
+							    	   '   <tr>'+
+							    	   '     <td>'+$('.viewMore').data('mda_arrival')+'</td>'+
+							    	    '    <td>'+$('.viewMore').data('entered_taskqueue')+'</td>'+
+							    	    '    <td>'+$('.viewMore').data('diff_mda_n_ts')+'</td>'+
+							    	    '  </tr>'+	
+							    	    '   <tr>'+
+							    	    '    <th>JTB task queue</th>'+
+							    	    '    <th>From JTB task queue</th>'+
+							    	     '   <th></th>'+
+							    	    '  </tr>'+
+							    	    '   <tr>'+
+								    	   '     <td>'+$('.viewMore').data('entered_taskqueue')+'</td>'+
+								    	    '    <td>'+$('.viewMore').data('left_taskqueue')+'</td>'+
+								    	    '    <td>'+$('.viewMore').data('diff_wtq_n_rtq')+'</td>'+
+								    	    '  </tr>'+
+								    	    '   <tr>'+
+								    	    '    <th>Arrived from JTB</th>'+
+								    	    '    <th>Customer Notification</th>'+
+								    	     '   <th></th>'+
+								    	    '  </tr>'+
+								    	    '   <tr>'+
+									    	   '     <td>'+$('.viewMore').data('jtb_arrival')+'</td>'+
+									    	    '    <td>'+$('.viewMore').data('customer_notification')+'</td>'+
+									    	    '    <td>'+$('.viewMore').data('diff_st_n_cus')+'</td>'+
+									    	    '  </tr>'+			
+							    	   ' </tbody>'+
+							    	'  </table>'+							    	
+					    	'</div>'+
+				    
+									'</div>'+
+								'</div>'+
+					'</div>',
+				});	
+			//
+		});
+	</script>
+</body>
+ <!-- 
+ -->
+</html>

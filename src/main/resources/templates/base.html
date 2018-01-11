@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>Home - taxservices.gov.ng</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="../static/css/taxservice.css" th:href="@{/css/taxservice.css}"/>
+        <link  href="../static/css/kinki.ttf" th:href="@{/css/kinki.ttf}"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.min.css.map" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.min.css.map}"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../static/js/services.js" th:src="@{/js/services.js}" ></script>
+    </head>
+    <body>
+        <div class="page-cover" th:fragment="page-cover">
+            <div id="header" th:fragment="header">
+                <div id="tpn" >
+                    <img src="../static/img/new_jtb_logo.png" th:src="@{/img/new_jtb_logo.png}"/>
+                    <p style="color:whitesmoke">Tax Services</p>
+                </div>
+                <div id="text" >
+                    <form  class="form-inline">
+                        <div class="input-group">
+                            <input type="text" placeholder="Search for..." size="50" id="rcNo"/>
+                            <div class="input-group-btn">
+                                <button type="submit" id="search" class="btn btn-lg">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="login" >
+                    <ul>
+                        <li> <a href="../templates/signup.html" th:href="@{/signup}">Signup</a></li>
+                        <li><a href="../templates/login.html" th:href="@{/login}">Login</a></li>
+                    </ul>
+                </div> 
+            </div>
+            <div id="redirect">
+                <a href="#">View Featured Services<span class=" glyphicon glyphicon-hand-right"></span></a>
+            </div>
+            <div class="main-container">
+                <div id="top-container">
+                    <div  id="slides">
+                        <div id="myCarousel" class=" carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" ></li>
+                                <li data-target="#myCarousel" data-slide-to="1" ></li>
+                                <li data-target="#myCarousel" data-slide-to="2" ></li>
+                                <li data-target="#myCarousel" data-slide-to="3" ></li>
+                            </ol>
+                            <div id="slide-item"   class="carousel-inner">
+                                <div class="item active">
+                                    <div class="item active">
+                                        <img src="../img/cal1.jpg" th:src="@{/img/cal1.jpg}"/>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="..static/img/cal2.jpg"  th:src="@{/img/cal2.jpg}"/>
+                                </div>
+                                <div class="item">
+                                    <img src="../static/img/cal3.jpg" th:src="@{/img/cal3.jpg}"/>
+                                </div>
+                                <div class="item">
+                                    <img src="../static/img/cal4.jpg" th:src="@{/img/cal4.jpg}"/>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div  id="top-widget-container">
+                        <div id="top-widget-container1">
+                            <a href="#" th:href="@{#}">
+                                <div id="icon-A">
+                                    <i class="fa fa-bell-o"></i>
+                                    <p>Notification and <br/>Reminder</p>
+                                </div>
+                            </a>
+                            <a href="#" th:href="@{#}">
+                                <div id="icon-B1">
+                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                    <p>TIN <br/>Verification</p>
+                                </div>
+                            </a>
+                            <a href="#" th:href="@{#}">
+                                <div id="icon-B2">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                    <p>Online TIN <br/>Registration</p>
+                                </div>
+                            </a>
+
+                        </div>
+                        <div id="top-widget-container2">
+                            <a href="#" th:href="@{#}">
+                                <div id="icon-C">
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                    <p>TIN Protocols</p>
+                                </div>
+                            </a>
+                            <a href="#" th:href="@{#}">
+                                <div id="icon-D">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <p> Register</p>
+                                </div>
+                            </a>
+                            <a href="#" th:href="@{#}">
+                                <div id="icon-E">
+                                    <span class="glyphicon glyphicon-log-in"></span>
+                                    <p>Login</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div><div id="bottom-container">
+                    <div id="bottom-container1">
+                        <a href="../static/templates/faqs.html" th:href="@{/faqs}">
+                            <div id="icon-V">
+                               <i class="material-icons">list</i>
+                                <p>FAQs</p>
+                            </div>
+                        </a>
+                        <a href="#" th:href="@{#}">
+                            <div id="icon-X">
+                                <span class="glyphicon glyphicon-question-sign"></span>
+                                <p>Help and Support</p>
+                            </div>
+                        </a>
+                        <a href="#" th:href="@{#}">
+                            <div id="icon-Y">
+                                <span class="glyphicon glyphicon-earphone"></span>
+                                <p>Contact Us</p>
+                            </div>
+                        </a>
+                        <a href="#" th:href="@{#}">
+                            <div id="icon-Z">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <p>About Us</p>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div id="bottom-container2">
+                        <a target="_blank" href="https://stampduty.gov.ng/" >
+                            <div id="bottom-icon1">
+                                <span class="glyphicon glyphicon-pawn"></span>
+                                <p>Stamp Duties</p>
+                            </div>
+                        </a>
+                        <a  href="#"  th:href="@{#}">
+                            <div id="bottom-icon2">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <p> TIN Verification</p>
+                            </div>
+                        </a>
+                        <a target="_blank" href="/report" >
+                            <div id="bottom-icon3">
+                                <span class="glyphicon glyphicon-log-in"></span>
+                                <p>Report</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer id="foot" th:fragment="footer" class=" navbar-fixed-bottom">
+            <div id="foot-note">
+                <p class="text-right">Copyright &copy; 2017 TAX SERVICES</p>
+            </div>
+            <div id="social-group">
+                <div class="social_icon">
+                    <a href="www.facebook.com" th:href="@{www.facebook.com}"><i class= "fa fa-facebook-f"></i></a>
+                </div>   
+                <div class="social_icon ">
+                    <a href="www.instagram.com" th:href="@{www.instagram.com}"><i class="fa fa-instagram"></i></a>
+
+                </div>
+                <div class="social_icon">
+                    <a href="www.twitter.com" th:href="@{www.twitter.com}"><i class="fa fa-twitter"></i></a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

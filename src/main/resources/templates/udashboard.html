@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fTemplate :: head"></head>
+	<body>
+		
+		<div th:replace="uTemplate :: main_menu"></div>
+		
+		
+		<div class="container">
+		 <div style="padding-top:50px; min-height:600px" class="mx-auto col-md-offset-1">
+		 
+		 
+		 <div class="row">
+                   
+                    <div class="col-lg-4 col-md-4">
+                        <div class="panel panel-default " >
+                            <div class="panel-heading" >
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i style="transform: rotate(180deg);" class="fa fa-reply-all fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                   		 <div> Inbound Rc-Numbers From MDA </div>
+                                        <div style="font-size:40px;"><span class="badge" th:text="${incoming_rc_count}"></span></div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/administrator/inbound/rc-numbers">
+                                <div class="panel-footer" style="color:#f0ad4e;">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                   <div class="col-lg-4 col-md-4">
+                        <div class="panel panel-default" >
+                            <div class="panel-heading" >
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa  fa-send-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div>Outbound Rc-Numbers To JTB</div>
+                                        <div style="font-size:40px;"><span class="badge" th:text="${outgoing_rc_count}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/administrator/outbound/rc-number">
+                                <div class="panel-footer" >
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-arrow-down fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div>Inbound TINs From JTB</div>
+                                        <div style="font-size:40px;"><span class="badge"  th:text="${incoming_tin_count}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/administrator/inbound/rc-tin">
+                                <div class="panel-footer" style="color:#5cb85c;">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="col-lg-4 col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-list-ol fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div>All RC-Numbers Record</div>
+                                        <div style="font-size:40px;"><span class="badge"  th:text="${rc_numbers_count}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/administrator/all/rc-numbers/record">
+                                <div class="panel-footer" style="color:#550055;">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                   </div>
+         	 
+		
+			</div> 
+		</div>
+	 		
+		<div th:replace="uTemplate :: footer"></div> 
+</body>
+</html>

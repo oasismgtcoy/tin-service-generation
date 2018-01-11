@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="uTemplate :: head"></head>
+
+<body>
+
+	<div style="top: 0px" th:replace="uTemplate :: main_menu"></div>
+	<div class="center-container">			
+					
+			<form class="form-horizontal  col-md-10" action="/mailingList_add" method="post">
+				<div class="panel panel-default ">
+				  <div class="panel-heading">
+            Mailing List
+             </div>
+					<div class="panel panel-body" >
+					
+					<div class="form-group">
+                <label class="control-label col-sm-3" >Full Name:</label>
+                 <div class="col-sm-9">
+                  <input name="fullName" required="required" type="text"  class="form-control" placeholder="Enter FullName" />
+                 </div>
+                  </div>  					
+						<div class="form-group">
+                <label class="control-label col-sm-3" >Email:</label>
+                 <div class="col-sm-9">
+                  <input name="email" type="text" required="required" class="form-control" placeholder="Enter Email" />
+                 </div>
+                  </div>  						
+						
+					<div class="form-group">
+                <label class="control-label col-sm-3" >Phone Number:</label>
+                 <div class="col-sm-9">
+                  <input name="phoneNumber" required="required" type="text"  class="form-control" placeholder="Enter Phone Number"  />
+                
+                
+                 </div>
+                  </div>  	
+						
+						
+					</div>
+
+
+ <div class="panel-footer">
+             <div align="right">
+             	<input type="submit"  value="Save" class="btn btn-default"/>
+             </div>             
+             </div> 				</div>
+			</form>
+		
+		
+					
+	</div>
+	<div style="bottom: 0px" th:replace="uTemplate :: footer"></div>
+</body>
+ <!-- 
+ -->
+</html>

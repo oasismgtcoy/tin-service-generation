@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::head"></head>
+<body>
+	<div class="page-cover">
+		<div th:replace="base::header"></div>
+		<div class="form-space">
+		<form method="post" action="../templates/dashboard" th:attr="action=@{/new-account}" name="registration">
+			<div class="panel panel-default">
+				<div class="panel-heading" >
+					<h2>Create Account</h2> 
+					<span id="heading-notice"><strong>NOTE:</strong> <em> fields marked with <span style="color:red; font-size:18px"> * </span> are compulsory</em></span>
+				</div>
+				
+					<div class="panel-body">					
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+			   					<span style="color:red; font-size:18px">*</span><label for="firstname">First Name</label>
+			   					<input type="text" required="required"  title="enter your first name" name="firstname" id="contact-firstname" class="form-control"/>
+		   						
+		   					</div>
+		   					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+			   					<span style="color:red; font-size:18px">*</span><label for="lastname">Last Name</label>
+			   					<input type="text" required="required"  name="lastname" id="contact-lastname"  class="form-control"/>
+		   						
+		   						<!-- <span class="error">Your last name is required</span> -->
+		   					</div>
+		   				</div>
+		   				<div class="row">
+			   				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+			   					<span style="color:red; font-size:18px">*</span><label for="email">Email</label>
+			   					<input type="email" required="required"   name="email" id="contact-email"  class="form-control"/>
+			   					
+			   					<!-- <span class="error">Enter a valid email</span> -->
+			   				</div>
+			   				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+			  					<span style="color:red; font-size:18px">*</span><label for="gender">Phone Number</label>
+				  				<input type="number" required="required"  maxlength="13" name="phoneNumber" id="contact-tel"  class="form-control"/>
+			  					
+			  					<!-- <span class="error">Enter a valid phone number</span> -->
+			  				</div>
+		  				</div>
+		  				
+		  				<div class="row">
+		  				<div  class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form-group">
+			  					<span style="color:red; font-size:18px">*</span><label for="gender">Gender</label>
+			  					<select class="form-control" name="gender" required="required">
+			  						<option>Select gender</option>
+			  						<option>Female</option>
+			  						<option>Male</option>
+			  					</select>
+			  				</div>
+			  				<div  class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form-group">
+			  					<span style="color:red; font-size:18px">*</span><label for="country">Country</label>
+			  					<select id="country" name="country" class="form-control" required="required">
+			  					 <option value="0" >Select country</option>
+			  					 <option  value="1" >Nigeria</option>
+			  					</select>
+			  					
+			  				</div>
+			  				<div  class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form-group">
+			  					<span style="color:red; font-size:18px">*</span><label for="state">State </label>
+			  					<select name="state" id="state" class="form-control"  required="required">
+			  						<option >Select state</option>
+			  					</select>
+			  					
+			  				</div>
+			  				
+		  				</div>
+					
+				</div>
+				<div class="panel panel-default" id="account-panel">
+					<div class="panel-heading">
+						<h3>Account Credentials</h3>
+					</div>
+					<div class="panel-body">						
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+									<span style="color:red; font-size:18px">*</span><label for="username"> Username </label>
+					   				<input type="text" name="username" required="required" size="10" id="contact-username"  class="form-control"/>
+									<!-- <span class="error">Enter a valid Username</span> -->
+									
+								</div>
+								
+							</div>
+							<div class="row">
+								<div  class="col-xs-12 col-sm-12 col-md-6 col-lg-5  form-group">
+									<span style="color:red; font-size:18px">*</span><label for="password" class="control-label">Password</label>
+		        					<input type="password" minlength="8"  required="required" data-toggle="tooltip" data-placement="bottom"  title="Take note of the password entered. It will be re-entered"  name="password" id="contact-password"  class="form-control"/>
+									<!-- <span class="error">Password not less than 8 Characters</span> -->
+									
+								</div>
+								<div  class="col-xs-12 col-sm-12 col-md-6 col-lg-5 form-group">
+									<span style="color:red; font-size:18px">*</span><label for="password" class="control-label">Confirm Password</label>
+		        					<input type="password" name="confirmPassword" required="required" data-toggle="tooltip" data-placement="bottom"  title="Re-enter password" id="contact-confirmpassword" minlength="8"  class="form-control"/>
+									
+									<!-- <span class="error">Confirm previous password entered</span> -->
+								</div>
+							</div>
+						
+					</div>
+				</div>
+				<div id="account-footer" class="panel-footer" >
+						<a href="../templates/index.html" th:href="@{/}" id="index-link" class="btn btn-default">Back</a>
+						<input type="submit" id="user-dashboard-link" class="btn btn-default" value="Submit" />
+				</div>
+			</div>
+			</form>
+		</div>
+		
+	</div>
+	<footer th:replace="base::footer"></footer>
+	 <script type="text/javascript" src="../static/js/countries.js" th:src="@{/js/countries.js}" ></script> 
+	 <script language="javascript">
+            populateCountries("country", "state");
+          
+      </script>
+	
+</body>
+</html>

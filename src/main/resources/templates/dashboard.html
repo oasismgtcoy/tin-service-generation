@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fTemplate :: head"></head>
+	<body>
+		
+		<div style="top:0px" th:replace="fTemplate :: main_menu"></div>		
+		
+		<div class="center-container">
+					<div class="col-md-12 general-grids grids-right widget-shadow">
+						<h4 class="title2"></h4>
+						<ul id="myTabs" class="nav nav-tabs" role="tablist">						
+							 <li role="presentation" class="active">
+							 	<a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Dashboard</a></li>							 	
+							 <li role="presentation" class="dropdown">
+							 	 <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">More<span class="caret"></span></a> 
+							 	 <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+							 	 	 <li class=""><a href="#dropdown1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">JTB Incoming</a></li>
+							 	 	  <!-- <li class=""><a href="#dropdown2" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2" aria-expanded="false">Tin Response</a></li>
+							 	 	  <li class=""><a href="#dropdown3" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2" aria-expanded="false">Pending JTB Requests</a></li>
+							 	 	  <li class=""><a href="#dropdown4" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2" aria-expanded="false">Pending JTB Response</a></li> -->
+							 	 </ul> 
+							 </li>
+					    </ul>
+					   
+						<div id="myTabContent" class="tab-content scrollbar1">							 
+							 <div role="tabpanel" class="tab-pane fade active in" id="profile" aria-labelledby="profile-tab"> 
+							 	 <div class="bs-example widget-shadow" data-example-id="contextual-table"> 
+							 	 	<br/>	
+							 	 	<h5 th:if="${errmessage != null}" th:text="${errmessage}" class="text text-danger"> </h5>	
+						            <h5 th:if="${backMessage != null}" th:text="${rc_tin_list.size()+' record(s) found for '+backMessage}" class="text text-primary"> </h5>						
+									<form class="form-horizontal" th:attr="action=@{/tin-generation/query}" action="/tin-generation/query" method="post">               
+						                              			                 	
+					                 	 <div class="panel panel-default">						                 		               	 
+					                 	 	
+					                 	 	<div class="panel panel-body">					                 	 		
+						                 	 	 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">	
+							                 	 	<select name="type" class="form-control" >
+								                 	 	<option selected="selected" th:if="${type != null}" th:value="${type}" th:text="${'--- '+backMessage+' ---'}"></option>
+								                 	 	<option value="RECEPT_ACKNOWLEDGED">Acknowledged sent from JTB</option>
+							                 	 	    <option value="SENT">Unacknowledged sent  from JTB</option>
+							                 	 	    <option value="NOT_SENT">Not sent to JTB</option>						                 	 	   
+							                 	 	   <option value="HAS_TIN">Got TIN  from JTB</option>
+							                 	 	 </select>                
+							               		 </div>             		 
+					                 	 	                 	 		
+						                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+												 	<div class="input-group">
+													    <span class="input-group-addon">From</span>
+													    <input required="required" name="startDate" placeholder="Select..." id="strtDate" class="form-control" type="text" /> 
+													</div>
+												 </div>
+												 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+												 	<div class="input-group">
+												       <span class="input-group-addon">To</span>
+												       <input required="required" name="endDate" placeholder="Select..."  id="endDate" class="form-control col-xs-12 col-sm-12 col-md-2 col-lg-2" type="text"/> 
+												    </div>
+												 </div>	
+												  <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+												 	<input class="btn btn-danger" value="Search" type="submit" />
+												  </div>							 
+					                 	 	 </div>               	 	
+					                 	 </div>               		                            
+					                </form>          
+									
+									<table id="example" class="table table-striped table-bordered"> 					
+										<thead> 
+											<tr> 
+												 <th>RC Number</th> 
+												 <th>Org. Name</th>
+												 <th>Org. Type</th> 
+												 <th>Status</th> 
+												 <th>Date</th> 
+												 <th>Action</th>
+											 </tr> 
+										 </thead>
+										<tbody> 
+											<tr class="active" th:each="rc_tin, indx: ${rc_tin_list}"> <td th:text="${rc_tin.rcno}"></td> <td th:text="${rc_tin.name_of_organization}" >NS59489947979</td> <td th:text="${rc_tin.corporateTinGenerationRequest.type_of_organization}" >NS59489947979</td> <td th:text="${rc_tin.messageStatus}">12/03/2017</td> <td th:text="${rc_tin.requestedWhen}"></td> <td> <a class="btn btn-default btn-sm" th:text="'View'" th:href="@{/incoming/request/rc-tin/(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin">View</a> <a class="btn btn-default btn-sm" th:href="@{/notification/rc-tin/send-email(rcNumber=${rc_tin.rcno})}" href="/notification/rc-tin/send-email" th:if="${rc_tin.messageStatus.name() eq 'HAS_TIN'}" th:text="'Resend Notification'">Resend Notification</a>  <a class="btn btn-default btn-sm" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="#" th:if="${rc_tin.messageStatus.name() == 'SENT' }" th:text="'Resend'">Resend</a>  <a class="btn btn-default btn-sm" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/send" th:if="${rc_tin.messageStatus.name() == 'NOT_SENT'}"  th:text="'Send'">Send</a><a class="btn btn-default btn-sm" th:href="@{/incoming/request/rc-tin/reverse(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/reverse" th:if="${rc_tin.messageStatus.name() == 'RECEPT_ACKNOWLEDGED'}"  th:text="'Recall'">Recall</a></td> </tr> 
+										</tbody> 
+									</table>  
+								</div>
+							 </div> 
+							 <div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab"> 
+							 	 <div class="bs-example widget-shadow" data-example-id="contextual-table"> 
+									<h5>Today's JTB Incoming:</h5>
+									<table id="example" class="table table-striped table-bordered"> 					
+										<thead> 
+											<tr> 
+												<th>RC Number</th> 
+												 <th>TIN</th> 
+												 <th>Org. Name</th> 
+												  <th>Org. Type</th> 
+												 <th>Date</th> 
+												 <th>Action</th>
+											 </tr> 
+										 </thead>
+										<tbody> 
+											<tr class="" th:each="rc_tin, indx: ${jtb_rc_tin_list}"><td th:text="${rc_tin.rcno} ">New Staff</td><td th:text="${rc_tin.tin} ">New Staff</td> <td th:text="${rc_tin.name_of_organization}" >NS59489947979</td> <td th:text="${rc_tin.corporateTinGenerationRequest.type_of_organization}" >NS59489947979</td> <td th:text="${rc_tin.requestedWhen}"></td> <td> <a class="btn btn-default" th:text="'View'" th:href="@{/incoming/request/rc-tin/(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin">View</a> <a class="btn btn-default" th:href="@{/notification/rc-tin/send-email(rcNumber=${rc_tin.rcno})}" href="/notification/rc-tin/send-email" th:if="${rc_tin.messageStatus.name() eq 'HAS_TIN'}" th:text="'Resend Notification'">Resend Notification</a>  <a class="btn btn-default" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="#" th:if="${rc_tin.messageStatus.name() == 'SENT' }" th:text="'Resend'">Resend</a>  <a class="btn btn-default" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/send" th:if="${rc_tin.messageStatus.name() == 'NOT_SENT'}"  th:text="'Send'">Send</a></td> </tr> 
+										</tbody> 
+									</table>  
+								</div>
+							 </div> 
+							 <div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab"> 
+							 	  <div class="bs-example widget-shadow" data-example-id="contextual-table"> 
+									<h4>Account Types:</h4>
+									<table class="table"> 
+										<thead> <tr> <th>#</th> <th>Full Name</th> <th>Staff ID</th> <th>Department</th> <th>Rank</th> <th>Registered</th> <th>Action</th></tr> </thead>
+										<tbody> 
+											<tr class="active" th:each="staff, indx: ${staffs}"> <th scope="row" th:text="${indx.index} + 1" >1</th> <td th:text="${staff} + ' ' +${staff} "></td> <td th:text="${staff}" >NS59489947979</td> <td th:text="${staff}" >NS59489947979</td> <td th:text="${staff}" >NS59489947979</td> <td th:text="${staff}">12/03/2017</td> <td><a href="#" th:href="@{/staff_edit?(id=${staff})}">View</a></td> </tr> 
+										</tbody> 
+									</table> 
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="dropdown3" aria-labelledby="dropdown2-tab"> 
+							 	  <div class="bs-example widget-shadow" data-example-id="contextual-table"> 
+									<h4>Identity Providers:</h4>
+									<table class="table"> 
+										<thead> <tr> <th>#</th> <th>Full Name</th> <th>Staff ID</th> <th>Department</th> <th>Rank</th> <th>Registered</th> <th>Action</th></tr> </thead>
+										<tbody> 
+											<tr class="active" th:each="staff, indx: ${staffs}"> <th scope="row" th:text="${indx.index} + 1" >1</th> <td th:text="${staff} + ' ' +${staff} "></td> <td th:text="${staff}" >NS59489947979</td> <td th:text="${staff}" >NS59489947979</td> <td th:text="${staff}" >NS59489947979</td> <td th:text="${staff}">12/03/2017</td> <td><a href="#" th:href="@{/staff_edit?(id=${staff})}">View</a></td> </tr> 
+										</tbody> 
+									</table> 
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="dropdown4" aria-labelledby="dropdown2-tab"> 
+							 	  <div class="bs-example widget-shadow" data-example-id="contextual-table"> 
+									<div class="row">
+										<h4 class="col-md-11">Roles:</h4>
+										<a class="btn btn-default " href="role-new" th:href="@{/role-new}">Add New </a>
+									</div>
+									
+						              <div class="panel-body table-responsive">
+						               <table class="table table-striped"> 
+										<thead> 
+											<tr> 
+												<th>#</th>
+											 	<th>Full Name</th>
+											  	<th>Description</th>
+											   	<th>Registered</th>
+											    <th>Action</th>
+											 </tr> 
+										</thead>
+										<tbody> 
+											<tr class="active" th:each="staff, indx: ${staffs}"> 
+												<td scope="row" th:text="${indx.index} + 1" >1</td> 
+												<td th:text="${staff} + ' ' +${staff} "></td> 
+												<td th:text="${staff}" >NS59489947979</td> 
+												<td th:text="${staff}">12/03/2017</td>
+												<td><a href="#" th:href="@{/staff_edit?(id=${staff})}">View</a></td> 
+											</tr> 
+										</tbody> 
+									</table>
+									</div> 
+								</div>
+							</div>
+					 </div>
+					</div>
+					<div class="clearfix"> </div>
+										
+		</div>
+	 		
+		<div style="bottom:0px" th:replace="fTemplate :: footer"></div> 
+		
+      <script>
+	     $(document).ready(function() {
+	 		$('.table').DataTable();
+	 	});
+	     $( function() {
+    	    $( "#endDate" ).datepicker({dateFormat: 'dd/mm/yy', maxDate:'+0m +0w' });
+    	    $( "#strtDate" ).datepicker({dateFormat: 'dd/mm/yy'});
+    	  });
+     </script>
+		
+</body>
+</html>
