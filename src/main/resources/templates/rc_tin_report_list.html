@@ -176,9 +176,19 @@
 	</div>
 	<div style="bottom: 0px" th:replace="uTemplate :: footer"></div>
 	<script>
-		$(document).ready(function() {
+		/* $(document).ready(function() {
 			$('.table').DataTable();
 		});
+		 */
+		$(document).ready(function() {
+		    $('#example').DataTable( {
+		        dom: 'Bfrtip',
+		        buttons: [
+             'copy', 'csv', 'excel', 'pdf', 'print'
+		        ]
+		    } );
+		    $('#non_data_table').DataTable().destroy();
+		} ); 
 		/*  $( function() {
     	    $( "#endDate" ).datepicker({dateFormat: 'dd/mm/yy', maxDate:'+0m +0w' });
     	    $( "#strtDate" ).datepicker({dateFormat: 'dd/mm/yy'});

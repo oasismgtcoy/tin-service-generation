@@ -3,7 +3,9 @@
 	<head th:replace="fTemplate :: head"></head>
 	<body>
 		
-		<div style="top:0px" th:replace="fTemplate :: main_menu"></div>		
+		<div style="top:0px" th:replace="fTemplate :: main_menu">
+		
+		</div>		
 		
 		<div class="center-container">
 		<strong><i th:text="${pageTitle}"></i></strong><br/><br/>
@@ -22,7 +24,12 @@
 						 </tr> 
 					 </thead>
 					<tbody> 
-						<tr th:each="rc_tin, indx: ${rc_tin_list}"> <td th:text="${rc_tin.rcno} ">New Staff</td><td th:text="${rc_tin.tin} ">New Staff</td> <td th:text="${rc_tin.name_of_organization}" >NS59489947979</td> <td th:text="${rc_tin.corporateTinGenerationRequest.type_of_organization}" >NS59489947979</td> <td th:text="${rc_tin.requestedWhen}" ></td> <td> <a class="btn btn-default" th:text="'View'" th:href="@{/incoming/request/rc-tin/(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin">View</a> <a class="btn btn-default" th:href="@{/notification/rc-tin/send-email(rcNumber=${rc_tin.rcno})}" href="/notification/rc-tin/send-email" th:if="${rc_tin.messageStatus.name() eq 'HAS_TIN'}" th:text="'Resend Notification'">Resend Notification</a>  <a class="btn btn-default" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="#" th:if="${rc_tin.messageStatus.name() == 'SENT' }" th:text="'Resend'">Resend</a>  <a class="btn btn-default" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/send" th:if="${rc_tin.messageStatus.name() == 'NOT_SENT'}"  th:text="'Send'">Send</a><a class="btn btn-default" th:href="@{/incoming/request/rc-tin/reverse(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/reverse" th:if="${rc_tin.messageStatus.name() == 'RECEPT_ACKNOWLEDGED'}"  th:text="'Recall'">Recall</a></td> </tr> 
+						<tr th:each="rc_tin, indx: ${rc_tin_list}"> <td th:text="${rc_tin.rcno} ">New Staff</td>
+						<td th:text="${rc_tin.tin} ">New Staff</td> 
+						<td th:text="${rc_tin.name_of_organization}" >NS59489947979</td> 
+						<td th:text="${rc_tin.corporateTinGenerationRequest.type_of_organization}" >NS59489947979</td>
+						 <td th:text="${rc_tin.requestedWhen}" ></td> 
+						 <td> <a class="btn btn-default" th:text="'View'" th:href="@{/incoming/request/rc-tin/(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin">View</a> <a class="btn btn-default" th:href="@{/notification/rc-tin/send-email(rcNumber=${rc_tin.rcno})}" href="/notification/rc-tin/send-email" th:if="${rc_tin.messageStatus.name() eq 'HAS_TIN'}" th:text="'Resend Notification'">Resend Notification</a>  <a class="btn btn-default" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="#" th:if="${rc_tin.messageStatus.name() == 'SENT' }" th:text="'Resend'">Resend</a>  <a class="btn btn-default" th:href="@{/incoming/request/rc-tin/send(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/send" th:if="${rc_tin.messageStatus.name() == 'NOT_SENT'}"  th:text="'Send'">Send</a><a class="btn btn-default" th:href="@{/incoming/request/rc-tin/reverse(rcNumber=${rc_tin.rcno})}" href="/incoming/request/rc-tin/reverse" th:if="${rc_tin.messageStatus.name() == 'RECEPT_ACKNOWLEDGED'}"  th:text="'Recall'">Recall</a></td> </tr> 
 					</tbody> 
 				</table>  
 				
@@ -58,9 +65,23 @@
 		</div>
 		<div style="bottom:0px" th:replace="fTemplate :: footer"></div> 
 		  <script>
-		     $(document).ready(function() {
+		    /*  $(document).ready(function() {
 		 		$('.table').DataTable();
-		 	});
+		 	}); */
+		     
+		     
+		     $(document).ready(function() {
+	    		    $('.table').DataTable( {
+	    		        dom: 'Bfrtip',
+	    		        buttons: [
+	    		            'copyHtml5',
+	    		            'excelHtml5',
+	    		            'csvHtml5',
+	    		            'pdfHtml5'
+	    		        ]
+	    		    } );
+	    		    $('#non_data_table').DataTable().destroy();
+	    		} ); 
 		  </script>
 </body>
 </html>
